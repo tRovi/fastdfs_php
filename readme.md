@@ -2,30 +2,69 @@
 
 provide fastdfs file access interface by PHP
 
-- [Simple, fast routing engine](https://laravel.com/docs/routing).
-- [Powerful dependency injection container](https://laravel.com/docs/container).
-- Multiple back-ends for [session](https://laravel.com/docs/session) and [cache](https://laravel.com/docs/cache) storage.
-- Expressive, intuitive [database ORM](https://laravel.com/docs/eloquent).
-- Database agnostic [schema migrations](https://laravel.com/docs/migrations).
-- [Robust background job processing](https://laravel.com/docs/queues).
-- [Real-time event broadcasting](https://laravel.com/docs/broadcasting).
+```
+/**
+     * [fastdfsClientVersion 获取fastdfs客户端版本]
+     * @return [string] [description]
+     */
+    public function fastdfsClientVersion();
 
-Laravel is accessible, yet powerful, providing tools needed for large, robust applications. A superb combination of simplicity, elegance, and innovation give you tools you need to build any application with which you are tasked.
+    /**
+     * [getFileInfo 根据文件名获取文件信息]
+     * @param  string $groupName [文件的组名称]
+     * @param  string $fileName  [存储服务器上的文件名]
+     * @return [array]            []
+     */
+    public function getFileInfo(string $groupName, string $fileName);
 
-## Learning Laravel
+    /**
+     * [fileExist 检查文件是否存在]
+     * @param  string $groupName      [文件的组名称]
+     * @param  string $remoteFilename [存储服务器上的文件名]
+     * @return [bool]                 [true or false]
+     */
+    public function fileExist(string $groupName, string $remoteFilename);
 
-Laravel has the most extensive and thorough documentation and video tutorial library of any modern web application framework. The [Laravel documentation](https://laravel.com/docs) is thorough, complete, and makes it a breeze to get started learning the framework.
+    /**
+     * [uploadFile 上传文件至存储服务器]
+     * @param  string $localFilename      [本地文件名称]
+     * @param  string $fileExtName      [文件扩展名，不包含.]
+     * @param  array $meta_list [数组形式的元信息，例如:array('width'=>1024, 'height'=>768)]
+     * @param  string $groupName      [文件的组名称]
+     * @return [bool]                 [file_id for success, false for error]
+     */
+    public function uploadFile(string $localFilename,string $fileExtName=null,array $metaList=[],string $groupName=null);
 
-If you're not in the mood to read, [Laracasts](https://laracasts.com) contains over 900 video tutorials on a range of topics including Laravel, modern PHP, unit testing, JavaScript, and more. Boost the skill level of yourself and your entire team by digging into our comprehensive video library.
+    /**
+     * [deleteFile 从存储服务器上删除文件]
+     * @param  string $groupName      [文件的组名称]
+     * @param  string $remoteFilename [存储服务器上的文件名]
+     * @return [bool]                 [true or false]
+     */
+    public function deleteFile(string $groupName, string $remoteFilename);
 
-## Contributing
+    /**
+     * [setMetadata 设置元信息]
+     * @param  string $groupName      [文件的组名称]
+     * @param  string $remoteFilename [存储服务器上的文件名]
+     * @param  array $meta_list [数组形式的元信息，例如:array('width'=>1024, 'height'=>768)]
+     * @return [bool]                 [true or false]
+     */
+    public function setMetadata(string $groupName, string $remoteFilename,array $metaList);
 
-Thank you for considering contributing to the Laravel framework! The contribution guide can be found in the [Laravel documentation](http://laravel.com/docs/contributions).
+    /**
+     * [getMetadata 获取元信息]
+     * @param  string $groupName      [文件的组名称]
+     * @param  string $remoteFilename [存储服务器上的文件名]
+     * @return [bool]                 [true or false]
+     */
+    public function getMetadata(string $groupName, string $remoteFilename);
 
-## Security Vulnerabilities
-
-If you discover a security vulnerability within Laravel, please send an e-mail to Taylor Otwell at taylor@laravel.com. All security vulnerabilities will be promptly addressed.
-
-## License
-
-The Laravel framework is open-sourced software licensed under the [MIT license](http://opensource.org/licenses/MIT).
+    /**
+     * [downloadFile 从存储服务器上下载文件]
+     * @param  string $groupName      [文件的组名称]
+     * @param  string $remoteFilename [存储服务器上的文件名]
+     * @return [bool]                 [返回文件流true or false]
+     */
+    public function downloadFile(string $groupName, string $remoteFilename);
+    ```
