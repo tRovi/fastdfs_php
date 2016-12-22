@@ -67,4 +67,4 @@ provide fastdfs file access interface by PHP
      * @return [bool]                 [返回文件流true or false]
      */
     public function downloadFile(string $groupName, string $remoteFilename);
-    ```
+```
