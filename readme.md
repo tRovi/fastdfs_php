@@ -1,4 +1,4 @@
-## About Laravel
+## About fastdfs_php
 
 provide fastdfs file access interface by PHP
 
